@@ -1,0 +1,30 @@
+node_modules/
+.pnpm-store/
+harness/dist/
+.env
+!.env.example
+ai-docs/todos/current-task-brief.md
+*.log
+
+# Next.js build output
+.next/
+out/
+
+# SQLite databases
+prisma/*.db
+prisma/*.db-journal
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Tool caches and build artifacts
+coverage/
+dist/
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+
+# Storybook static build
+storybook-static/

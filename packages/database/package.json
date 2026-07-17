@@ -1,0 +1,21 @@
+{
+  "name": "@repo/database",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./index.ts", "./schema": "./schema.ts" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@auth/core": "^0.40.0",
+    "@libsql/client": "^0.15.0",
+    "drizzle-orm": "^0.45.2",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": { "drizzle-kit": "^0.31.0", "typescript": "^5.9.0", "vitest": "^3.2.0" }
+}

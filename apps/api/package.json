@@ -1,0 +1,26 @@
+{
+  "name": "@repo/api",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/src/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@auth/core": "^0.40.0",
+    "@auth/drizzle-adapter": "^1.11.0",
+    "@hono/auth-js": "^1.1.0",
+    "@hono/node-server": "^1.19.0",
+    "@repo/contracts": "workspace:*",
+    "@repo/database": "workspace:*",
+    "dotenv": "^17.0.0",
+    "hono": "^4.12.25",
+    "pino": "^9.0.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": { "tsx": "^4.20.0", "typescript": "^5.9.0", "vitest": "^3.2.0" }
+}

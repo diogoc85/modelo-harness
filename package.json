@@ -1,0 +1,23 @@
+{
+  "name": "codex-software-template",
+  "version": "2.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": { "node": ">=20.11.0" },
+  "scripts": {
+    "dev": "pnpm --filter @repo/web --filter @repo/api --parallel dev",
+    "build": "pnpm -r run build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "audit:security": "pnpm audit --audit-level high"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
