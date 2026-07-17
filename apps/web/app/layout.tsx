@@ -2,8 +2,8 @@ import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export const metadata = {
-  title: "Antigravity App",
-  description: "Construído via Harness e Gemini",
+  title: "Codex Software Template",
+  description: "Base moderna para desenvolvimento de software.",
 };
 
 export default function RootLayout({

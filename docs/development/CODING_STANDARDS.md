@@ -44,7 +44,9 @@
 
 - **Rastreamento de Tráfego e Performance (OpenTelemetry):** A latência de todas as rotas e queries de banco de dados é rastreada na raiz pelo `instrumentation.ts` via OpenTelemetry. Todo código deve ser otimizado buscando menor latência e livre de gargalos.
 - **Logs Estruturados (Pino.js):** É expressamente proibido usar `console.log` ou `console.error` cruas em ambiente de produção. Toda rota de API sob o escopo `app/api/` deve conter blocos `try/catch` estruturados, e as exceções capturadas devem obrigatoriamente ser registradas através do utilitário `logger` importado de `lib/logger.ts`, injetando a mensagem de erro, stack trace e dados da sessão.
-- **Rastreamento Semântico de LLMs (Langfuse):** Chamadas para serviços de Inteligência Artificial ou LLMs (como o Gemini) DEVEM ser rastreadas e auditadas em tempo real utilizando a instância `langfuse` importada de `lib/langfuse.ts`. Isso assegura o monitoramento de prompts, latência e consumo de tokens em produção.
+- **Rastreamento de IA (opcional):** Caso o produto integre um provedor de IA, rastreie prompts,
+  latência, custo e falhas com uma ferramenta de observabilidade adequada. Essa integração é uma
+  decisão do produto, não uma dependência do template.
 
 ## ⚡ DIRETRIZES DE ALTA PERFORMANCE (ANTI-GARGALO)
 
