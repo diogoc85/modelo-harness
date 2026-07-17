@@ -1,5 +1,7 @@
 node_modules/
 .pnpm-store/
+.pnpm-cache/
+.corepack/
 harness/dist/
 .env
 !.env.example
