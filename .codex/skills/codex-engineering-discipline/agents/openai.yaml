@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Engineering Discipline"
+  short_description: "Implementações simples, autônomas e verificáveis"
+  default_prompt: "Use $codex-engineering-discipline para implementar esta mudança com autonomia proporcional ao risco e verificação objetiva."
