@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Against Contract"
+  short_description: "Review changes for standards and intent"
+  default_prompt: "Use $review-against-contract to review this change against repository standards and its originating contract."

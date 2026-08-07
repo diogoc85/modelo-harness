@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "mattpocock-skills",
+      "repository": "https://github.com/mattpocock/skills",
+      "revision": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+      "license": "MIT",
+      "reviewedAt": "2026-08-07",
+      "adaptation": "rewritten",
+      "influences": [
+        {
+          "localSkill": "diagnose-with-evidence",
+          "upstreamPath": "skills/engineering/diagnosing-bugs/SKILL.md"
+        },
+        {
+          "localSkill": "write-agent-instructions",
+          "upstreamPath": "skills/productivity/writing-for-agents/SKILL.md"
+        },
+        {
+          "localSkill": "review-against-contract",
+          "upstreamPath": "skills/engineering/code-review/SKILL.md"
+        }
+      ]
+    }
+  ]
+}

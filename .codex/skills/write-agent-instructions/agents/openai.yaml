@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Agent Instructions"
+  short_description: "Create concise, reliable agent guidance"
+  default_prompt: "Use $write-agent-instructions to improve these project instructions without bloating context."

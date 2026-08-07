@@ -49,6 +49,13 @@ Memórias de trabalho locais podem ser mantidas em `.harness/memory/local/` e nu
 Memórias úteis à equipe ficam em `.harness/memory/team/`, após revisão e com fonte verificável. Elas
 são contexto auxiliar, não substituem PRD, decisões arquiteturais, código ou testes.
 
+## Skills nativas
+
+O template inclui workflows sob demanda em `.codex/skills/` para disciplina geral de engenharia,
+diagnóstico baseado em evidências, escrita de instruções para agentes e revisão contra padrões e
+contrato. Conceitos adaptados de fontes externas usam revisão fixa e licença registradas em
+`.harness/skills/provenance.json`; `pnpm harness:audit` valida a estrutura e a proveniência.
+
 ## Segurança
 
 Não versione `.env`, bancos SQLite locais, tokens ou dados pessoais. A API deve validar entradas,

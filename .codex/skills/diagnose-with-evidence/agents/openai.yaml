@@ -1,0 +1,4 @@
+interface:
+  display_name: "Diagnose With Evidence"
+  short_description: "Reproduce, isolate, and fix bugs safely"
+  default_prompt: "Use $diagnose-with-evidence to diagnose this failure before proposing a fix."
