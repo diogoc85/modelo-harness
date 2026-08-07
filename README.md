@@ -31,9 +31,11 @@ pnpm dev
 Antes de entregar uma mudança:
 
 ```bash
-pnpm check
-pnpm audit:security
+pnpm verify
 ```
+
+O comando audita a configuração do harness, executa lint, tipos, testes, build e auditoria de
+dependências, e grava apenas status e duração em `.artifacts/verification/latest.md`.
 
 ## Fluxo com Codex
 
@@ -42,6 +44,10 @@ pnpm audit:security
 3. Planeje tarefas pequenas com critérios de aceite em `docs/tasks/`.
 4. Implemente, teste e documente decisões relevantes.
 5. Só considere a tarefa concluída quando a Definition of Done for atendida.
+
+Memórias de trabalho locais podem ser mantidas em `.harness/memory/local/` e nunca são versionadas.
+Memórias úteis à equipe ficam em `.harness/memory/team/`, após revisão e com fonte verificável. Elas
+são contexto auxiliar, não substituem PRD, decisões arquiteturais, código ou testes.
 
 ## Segurança
 

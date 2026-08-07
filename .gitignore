@@ -24,6 +24,8 @@ prisma/*.db-journal
 coverage/
 dist/
 *.tsbuildinfo
+.artifacts/
+.harness/memory/local/
 
 # OS files
 .DS_Store

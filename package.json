@@ -10,9 +10,12 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "typecheck": "pnpm -r run typecheck",
-    "test": "pnpm -r run test",
+    "test": "pnpm test:harness && pnpm -r run test",
+    "test:harness": "node --test tools/*.test.mjs",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
-    "audit:security": "pnpm audit --audit-level high"
+    "audit:security": "pnpm audit --audit-level high",
+    "harness:audit": "node tools/harness-audit.mjs",
+    "verify": "node tools/verify.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
