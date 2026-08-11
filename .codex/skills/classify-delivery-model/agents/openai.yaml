@@ -1,0 +1,4 @@
+interface:
+  display_name: "Classify Delivery Model"
+  short_description: "Classify product delivery and activate its profile"
+  default_prompt: "Use $classify-delivery-model to classify this PRD and apply the correct delivery profile before implementation planning."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Execute Plan With Agents"
+  short_description: "Orquestrar planos com agentes sob autorização"
+  default_prompt: "Use $execute-plan-with-agents para executar este plano com os subagentes que solicitei."

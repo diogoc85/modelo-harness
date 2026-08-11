@@ -52,6 +52,22 @@ Usar plano somente quando houver etapas dependentes, risco relevante ou trabalho
 
 Aceitar uma mudança maior quando ela for necessária para obter uma solução completa, coerente e segura. Manter cada linha rastreável à intenção, não necessariamente à formulação literal do pedido.
 
+## Escrever testes que consigam falhar
+
+Ao criar ou alterar testes:
+
+1. Declarar o comportamento público protegido e qual mudança na produção faria o teste falhar.
+2. Derivar o resultado esperado do requisito, contrato ou exemplo independente, não da implementação
+   que está sendo testada.
+3. Observar comportamento real; não usar busca de texto, snapshots amplos ou chamadas de mocks como
+   substituto do resultado relevante.
+4. Usar mocks apenas em limites inevitáveis e manter ao menos uma verificação do caminho real quando
+   o risco justificar.
+
+Para correções e comportamentos de alto risco, observar o teste falhar pela razão esperada antes da
+implementação quando viável e vê-lo passar depois. Se código preexistente, geração ou ambiente
+impedir essa sequência, documentar a razão; não apagar trabalho válido apenas para simular o ritual.
+
 ## Verificar em camadas
 
 Escolher a menor combinação que forneça confiança proporcional ao risco:

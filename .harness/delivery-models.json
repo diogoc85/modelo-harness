@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "default": "traditional",
+  "profiles": [
+    {
+      "id": "traditional",
+      "document": "docs/product/profiles/TRADITIONAL.md",
+      "extends": []
+    },
+    {
+      "id": "saas",
+      "document": "docs/product/profiles/SAAS.md",
+      "extends": []
+    },
+    {
+      "id": "service-as-software",
+      "document": "docs/product/profiles/SERVICE_AS_SOFTWARE.md",
+      "extends": []
+    },
+    {
+      "id": "hybrid",
+      "document": "docs/product/profiles/HYBRID.md",
+      "extends": ["saas", "service-as-software"]
+    }
+  ]
+}

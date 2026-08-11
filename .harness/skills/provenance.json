@@ -22,6 +22,32 @@
           "upstreamPath": "skills/engineering/code-review/SKILL.md"
         }
       ]
+    },
+    {
+      "id": "obra-superpowers",
+      "repository": "https://github.com/obra/superpowers",
+      "revision": "3dcbd5c4b48e02263fbf4a3c01e3fe4f81d584d9",
+      "license": "MIT",
+      "reviewedAt": "2026-08-11",
+      "adaptation": "rewritten",
+      "influences": [
+        {
+          "localSkill": "plan-implementation",
+          "upstreamPath": "skills/writing-plans/SKILL.md"
+        },
+        {
+          "localSkill": "codex-engineering-discipline",
+          "upstreamPath": "skills/test-driven-development/SKILL.md"
+        },
+        {
+          "localSkill": "diagnose-with-evidence",
+          "upstreamPath": "skills/systematic-debugging/SKILL.md"
+        },
+        {
+          "localSkill": "execute-plan-with-agents",
+          "upstreamPath": "skills/subagent-driven-development/SKILL.md"
+        }
+      ]
     }
   ]
 }

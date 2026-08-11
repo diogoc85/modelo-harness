@@ -1,13 +1,59 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  inspectDeliveryModels,
   inspectMemoryDocument,
   inspectPackageScripts,
   inspectSkillDocument,
   inspectSkillMetadata,
   inspectSkillProvenance,
+  inspectTaskTemplate,
   inspectTrackedFiles,
 } from "./harness-audit.mjs";
+
+test("requires complete and safe delivery model profiles", () => {
+  const valid = {
+    schemaVersion: 1,
+    default: "traditional",
+    profiles: [
+      {
+        id: "traditional",
+        document: "docs/product/profiles/TRADITIONAL.md",
+        extends: [],
+      },
+      {
+        id: "saas",
+        document: "docs/product/profiles/SAAS.md",
+        extends: [],
+      },
+      {
+        id: "service-as-software",
+        document: "docs/product/profiles/SERVICE_AS_SOFTWARE.md",
+        extends: [],
+      },
+      {
+        id: "hybrid",
+        document: "docs/product/profiles/HYBRID.md",
+        extends: ["saas", "service-as-software"],
+      },
+    ],
+  };
+  assert.deepEqual(inspectDeliveryModels(valid), []);
+
+  valid.profiles[3].extends = ["saas", "missing"];
+  valid.profiles[0].document = "../outside.md";
+  assert.deepEqual(
+    inspectDeliveryModels(valid, () => false),
+    [
+      "delivery models: invalid document for 'traditional'",
+      "delivery models: missing document 'docs/product/profiles/SAAS.md'",
+      "delivery models: missing document 'docs/product/profiles/SERVICE_AS_SOFTWARE.md'",
+      "delivery models: missing document 'docs/product/profiles/HYBRID.md'",
+      "delivery models: 'hybrid' extends unknown profile 'missing'",
+      "delivery models: hybrid must extend saas and service-as-software",
+    ],
+  );
+});
 
 test("accepts the required harness scripts", () => {
   assert.deepEqual(
@@ -21,6 +67,27 @@ test("accepts the required harness scripts", () => {
     }),
     [],
   );
+});
+
+test("requires traceability and verification in the task template", () => {
+  const valid = [
+    "## Acceptance criteria",
+    "## Change map",
+    "## Tasks",
+    "## Traceability",
+    "| Criterion | Task | Evidence |",
+    "## Security and operational considerations",
+    "## Verification",
+  ].join("\n");
+  assert.deepEqual(inspectTaskTemplate(valid), []);
+  assert.deepEqual(inspectTaskTemplate("## Tasks\n"), [
+    "task template: missing '## Acceptance criteria'",
+    "task template: missing '## Change map'",
+    "task template: missing '## Traceability'",
+    "task template: missing '## Security and operational considerations'",
+    "task template: missing '## Verification'",
+    "task template: missing criterion-to-evidence mapping",
+  ]);
 });
 
 test("requires complete and discoverable skill UI metadata", () => {

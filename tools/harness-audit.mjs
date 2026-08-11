@@ -12,7 +12,18 @@ export const REQUIRED_FILES = [
   "docs/development/DEFINITION_OF_DONE.md",
   ".harness/memory/README.md",
   ".harness/skills/provenance.json",
+  ".harness/delivery-models.json",
   "THIRD_PARTY_NOTICES.md",
+  "docs/product/profiles/README.md",
+  "docs/architecture/AGENTIC_SYSTEM.md",
+  "docs/tasks/TEMPLATE.md",
+];
+
+const DELIVERY_MODEL_IDS = [
+  "traditional",
+  "saas",
+  "service-as-software",
+  "hybrid",
 ];
 
 const SENSITIVE_TRACKED_PATTERNS = [
@@ -52,6 +63,25 @@ export function inspectPackageScripts(packageJson) {
   return findings;
 }
 
+export function inspectTaskTemplate(contents) {
+  const findings = [];
+  const requiredSections = [
+    "## Acceptance criteria",
+    "## Change map",
+    "## Tasks",
+    "## Traceability",
+    "## Security and operational considerations",
+    "## Verification",
+  ];
+  for (const section of requiredSections) {
+    if (!contents.includes(section))
+      findings.push(`task template: missing '${section}'`);
+  }
+  if (!contents.includes("| Criterion | Task | Evidence |"))
+    findings.push("task template: missing criterion-to-evidence mapping");
+  return findings;
+}
+
 export function inspectTrackedFiles(files) {
   return files
     .filter((file) => {
@@ -60,6 +90,64 @@ export function inspectTrackedFiles(files) {
       return SENSITIVE_TRACKED_PATTERNS.some((pattern) => pattern.test(file));
     })
     .map((file) => `sensitive file is tracked: ${file}`);
+}
+
+export function inspectDeliveryModels(manifest, documentExists = () => true) {
+  const findings = [];
+  if (manifest.schemaVersion !== 1)
+    findings.push("delivery models: unsupported schemaVersion");
+  if (!Array.isArray(manifest.profiles))
+    return [...findings, "delivery models: profiles must be an array"];
+
+  const ids = manifest.profiles.map((profile) => profile.id);
+  for (const id of DELIVERY_MODEL_IDS) {
+    if (!ids.includes(id))
+      findings.push(`delivery models: missing profile '${id}'`);
+  }
+  for (const id of new Set(ids)) {
+    if (ids.filter((candidate) => candidate === id).length > 1)
+      findings.push(`delivery models: duplicate profile '${id}'`);
+  }
+  if (!ids.includes(manifest.default))
+    findings.push("delivery models: default must reference a profile");
+
+  for (const profile of manifest.profiles) {
+    const document = profile.document || "";
+    if (
+      typeof document !== "string" ||
+      !document.startsWith("docs/product/profiles/") ||
+      !document.endsWith(".md") ||
+      document.includes("..")
+    ) {
+      findings.push(`delivery models: invalid document for '${profile.id}'`);
+    } else if (!documentExists(document)) {
+      findings.push(`delivery models: missing document '${document}'`);
+    }
+    if (!Array.isArray(profile.extends)) {
+      findings.push(
+        `delivery models: extends must be an array for '${profile.id}'`,
+      );
+    } else {
+      for (const parent of profile.extends) {
+        if (!ids.includes(parent))
+          findings.push(
+            `delivery models: '${profile.id}' extends unknown profile '${parent}'`,
+          );
+      }
+    }
+  }
+
+  const hybrid = manifest.profiles.find((profile) => profile.id === "hybrid");
+  if (
+    hybrid &&
+    (!hybrid.extends?.includes("saas") ||
+      !hybrid.extends?.includes("service-as-software"))
+  ) {
+    findings.push(
+      "delivery models: hybrid must extend saas and service-as-software",
+    );
+  }
+  return findings;
 }
 
 export function inspectSkillDocument(contents, expectedName, filename) {
@@ -175,6 +263,11 @@ export function auditRepository(repositoryRoot = root) {
     errors.push(...inspectPackageScripts(packageJson));
   }
 
+  const taskTemplatePath = path.join(repositoryRoot, "docs/tasks/TEMPLATE.md");
+  if (existsSync(taskTemplatePath)) {
+    errors.push(...inspectTaskTemplate(readFileSync(taskTemplatePath, "utf8")));
+  }
+
   let trackedFiles = [];
   try {
     trackedFiles = execFileSync("git", ["ls-files"], {
@@ -265,6 +358,23 @@ export function auditRepository(repositoryRoot = root) {
       );
     } catch {
       errors.push("skill provenance: invalid JSON");
+    }
+  }
+
+  const deliveryModelsPath = path.join(
+    repositoryRoot,
+    ".harness/delivery-models.json",
+  );
+  if (existsSync(deliveryModelsPath)) {
+    try {
+      const manifest = JSON.parse(readFileSync(deliveryModelsPath, "utf8"));
+      errors.push(
+        ...inspectDeliveryModels(manifest, (document) =>
+          existsSync(path.join(repositoryRoot, document)),
+        ),
+      );
+    } catch {
+      errors.push("delivery models: invalid JSON");
     }
   }
 

@@ -5,6 +5,11 @@
 Before substantial work, read `docs/product/PRD.md`, `docs/product/DESIGN.md` when UI is involved,
 and `docs/architecture/SYSTEM.md`. Record durable architectural decisions under `docs/decisions/`.
 
+Before planning a new product, classify its delivery model using `docs/product/PRD.md` and
+`.harness/delivery-models.json`. Consult the selected profile under `docs/product/profiles/`. For
+Service as Software or hybrid products, also read `docs/architecture/AGENTIC_SYSTEM.md`. Ask before
+implementation when ambiguity would materially change tenancy, billing, autonomy or risk.
+
 ## Architecture
 
 - `apps/web` contains only the Next.js frontend.
@@ -37,9 +42,16 @@ memories with source and update metadata may be committed; local memories must r
 
 ## Task-specific skills
 
+- For multi-step, dependent or materially risky implementation work, use `plan-implementation` to
+  create a traceable plan under `docs/tasks/current/` before editing code. Skip it for small,
+  localized changes and read-only analysis.
 - For bugs, intermittent failures or performance regressions, use `diagnose-with-evidence` before
   proposing a cause or fix.
 - When creating or changing `AGENTS.md`, skills or other agent-facing instructions, use
   `write-agent-instructions` and preserve external provenance.
 - For code, branch, commit or pull-request reviews, use `review-against-contract` to assess repository
   standards and originating intent separately.
+- When starting from a PRD or changing tenancy, billing, agent autonomy or outcome responsibility,
+  use `classify-delivery-model` before implementation planning.
+- Use `execute-plan-with-agents` only when the user explicitly requests subagents, delegation,
+  parallel agents or multi-agent work and the approved plan has independent, non-overlapping tasks.

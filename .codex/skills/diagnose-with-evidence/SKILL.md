@@ -38,6 +38,20 @@ Não transformar ausência de evidência em uma causa inventada.
 Compartilhar hipóteses quando o conhecimento de domínio do usuário puder reordená-las, mas continuar
 com a melhor evidência disponível se a pergunta não for bloqueante.
 
+## Interromper churn
+
+Contar hipóteses rejeitadas para o mesmo sintoma. Após três tentativas de correção que falhem apesar
+de evidência e verificação adequadas, interromper novas mudanças e reavaliar:
+
+- se a reprodução representa o defeito real;
+- se o contrato esperado está correto;
+- se existe acoplamento ou estado compartilhado não observado;
+- se o problema exige uma decisão arquitetural.
+
+Não contornar o limite renomeando a hipótese ou empilhando outra correção. Apresentar as evidências,
+alternativas descartadas e a decisão necessária antes de uma quarta tentativa. Tentativas que
+falharam por erro de execução ou teste inválido não contam como hipóteses falsificadas.
+
 ## Corrigir quando autorizado
 
 1. Converter a reprodução mínima em teste de regressão no limite público correto, quando houver.
