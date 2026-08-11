@@ -1,9 +1,9 @@
 {
   "name": "codex-software-template",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "packageManager": "pnpm@11.9.0",
-  "engines": { "node": ">=20.11.0" },
+  "engines": { "node": ">=22.13.0" },
   "scripts": {
     "dev": "pnpm --filter @repo/web --filter @repo/api --parallel dev",
     "build": "pnpm -r run build",

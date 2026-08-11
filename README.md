@@ -26,7 +26,7 @@ AGENTS.md              instruções permanentes do projeto para Codex
 
 ## Uso
 
-Requer Node.js 20+ e pnpm.
+Requer Node.js 22.13+ e pnpm.
 
 ```bash
 pnpm install --frozen-lockfile
@@ -63,12 +63,34 @@ revisão contra padrões e contrato e execução multiagente explicitamente soli
 adaptados de fontes externas usam revisão fixa e licença registradas em
 `.harness/skills/provenance.json`; `pnpm harness:audit` valida a estrutura e a proveniência.
 
-`classify-delivery-model` analisa PRDs e ativa os requisitos corretos sem confundir uma funcionalidade
+`ingest-project-handoff` valida o pacote produzido por Plan Architect + Design OS antes do planejamento.
+
+`classify-delivery-model` analisa Product Blueprints/PRDs e ativa os requisitos corretos sem confundir uma funcionalidade
 de IA com Service as Software nem assumir autorização para implementar.
 
 `plan-implementation` usa `docs/tasks/TEMPLATE.md` para ligar critérios de aceite a tarefas e
 evidências. `execute-plan-with-agents` nunca ativa por conta própria: requer pedido explícito do
 usuário e tarefas sem propriedade de arquivos sobreposta.
+
+## Project Hub + Design OS
+
+The template also supports projects planned upstream by Plan Architect and Design OS.
+
+For integrated projects, export the approved handoff into `project-context/` and start Codex with:
+
+```text
+Iniciar a implementação deste projeto.
+```
+
+`AGENTS.md` routes the workflow through `ingest-project-handoff`, which validates Product Blueprint,
+Design Blueprint, Design QA/readiness, Figma mapping and versions before implementation planning.
+
+In integrated mode:
+
+- Product Blueprint owns product/business intent;
+- Design Blueprint + Figma own approved design intent;
+- Model Harness owns technical implementation;
+- design conflicts become Design Change Requests instead of silent redesigns.
 
 ## Segurança
 

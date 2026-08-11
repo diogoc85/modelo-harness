@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ingest Project Handoff"
+  short_description: "Validate Product and Design handoff before coding"
+  default_prompt: "Use $ingest-project-handoff to validate and ingest the approved Project Hub and Design OS handoff before implementation planning."
