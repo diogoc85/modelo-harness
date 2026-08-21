@@ -18,7 +18,7 @@
     "verify": "node tools/verify.mjs"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
+    "@biomejs/biome": "2.5.9",
     "@types/node": "^24.0.0",
     "typescript": "^5.9.0",
     "vitest": "^3.2.0"
